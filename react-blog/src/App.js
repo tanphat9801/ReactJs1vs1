@@ -1,11 +1,16 @@
 
 import './App.css';
-import Home from './Components/Home/Home';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <Home/>
+      <Header/>
+      <HomePage/>
+      <div className="spacing"></div>
+      <Footer/>
     </div>
   );
 }

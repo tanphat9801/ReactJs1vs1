@@ -1,14 +1,34 @@
-let images1 = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"];
+const btnEl = document.querySelector(".roll-dice");
+const imgDice1 = document.querySelector(".dice-1");
+const imgDice2 = document.querySelector("#dice-2");
 
-let images2 = ["2.png", "4.png", "3.png", "5.png", "6.png", "1.png"];
 
-randomImages = () => {
-  let random1 = Math.floor(Math.random() * images1.length);
-  let random2 = Math.floor(Math.random() * images2.length);
+const arrImages = [
+  "./images/1.png",
+  "./images/2.png",
+  "./images/3.png",
+  "./images/4.png",
+  "./images/5.png",
+  "./images/6.png"
+]
 
-  let selectimage1 = images1[random1];
-  let selectimage2 = images2[random2];
+function randomDiceIndex(){
+  return Math.floor(Math.random() * 6 )
+}
 
-  document.querySelector(".dice-1").src = `./images/${selectimage1}`;
-  document.querySelector("#dice-2").src = `./images/${selectimage2}`;
-};
+function handleClickRollDice(){
+  const idx1 = randomDiceIndex()
+  const idx2 = randomDiceIndex()
+  // console.log(idx1, idx2);
+  const src1 = arrImages[idx1]
+  const src2 = arrImages[idx2]
+
+  imgDice1.src = src1
+  imgDice2.src = src2
+}
+
+
+
+
+
+document.addEventListener("click", handleClickRollDice);
