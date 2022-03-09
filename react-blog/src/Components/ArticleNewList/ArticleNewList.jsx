@@ -1,21 +1,48 @@
 import "./article-item.css";
-import MainTitleSec from "../../shared/MainTitleSec";
-import NewListCard from "./NewListCard";
-import ButtonLoad from "../../shared/ButtonLoad";
+import MainTitle from "../../shared/MainTitle"
+import ArticleItem from "../ArticleItem";
+import Button from "../../shared/Button";
 const ArticleNewList = () => {
     return ( 
       <div className="articles-list section">
       <div className="tcl-container">
-        <MainTitleSec/>
-        <div className="tcl-row">
-          <NewListCard/>
-          <NewListCard/>
-          <NewListCard/>
-          <NewListCard/>
-          <NewListCard/>
-          <NewListCard/>
-        </div>
-        <ButtonLoad/>
+        <MainTitle
+             btnProps={{
+             type :'default',
+            }}
+             btnLabel='view more'>
+              Tieu de thu ba
+          </MainTitle>
+          <div className="tcl-row">
+
+            <div className="tcl-col-12 tcl-col-md-6">
+                <ArticleItem styleCard={true} showAvatar={false} />
+            </div>
+
+            <div className="tcl-col-12 tcl-col-md-6">
+                <ArticleItem styleCard={true} showAvatar={false} />
+            </div>
+
+            <div className="tcl-col-12 tcl-col-md-6">
+                <ArticleItem styleCard={true} showAvatar={false} />
+            </div>
+
+            <div className="tcl-col-12 tcl-col-md-6">
+                <ArticleItem styleCard={true} showAvatar={false} />
+            </div>
+
+            <div className="tcl-col-12 tcl-col-md-6">
+                <ArticleItem styleCard={true} showAvatar={false} />
+            </div>
+
+            <div className="tcl-col-12 tcl-col-md-6">
+                <ArticleItem styleCard={true} showAvatar={false} />
+            </div>
+
+          </div>
+          <div className="text-center">
+            <Button type='primary' size='large' loading>Load more</Button>
+          </div>
       </div>
     </div>
      );

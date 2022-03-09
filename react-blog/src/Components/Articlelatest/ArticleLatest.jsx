@@ -1,16 +1,25 @@
 import "./article-item.css";
 import "./Latestnew.css";
-import LastCard from "./LastCard";
+import ArticleItem from "../ArticleItem";
 import MainTitle from "../../shared/MainTitle";
 const ArticleLatest = () => {
     return ( 
         <div className="latest-news section">
             <div className="tcl-container">
-                <MainTitle/>
+                <MainTitle btnProps={{}} btnLabel=''>Tieu de thu nhat</MainTitle>
                 <div className="latest-news__list spacing">
-                    <LastCard/>
-                    <LastCard/>
-                    <LastCard/>
+
+                    <div className="latest-news__card">
+                    <ArticleItem/>
+                    </div>
+
+                    <div className="latest-news__card">
+                    <ArticleItem/>
+                    </div>
+
+                    <div className="latest-news__card">
+                    <ArticleItem/>
+                    </div>
                 </div>
             </div>
       </div>
