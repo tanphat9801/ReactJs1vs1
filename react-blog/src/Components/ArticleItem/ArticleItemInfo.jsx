@@ -4,7 +4,7 @@ const ArticleItemInfo = () => {
     return ( 
         <>
                     <div className="article-item__info">
-                        <ArticleAvatar showAvatar />
+                        <ArticleAvatar/>
                         <div className="article-item__info-right">
                             <div className="article-item__author-name">
                             <a href="/"><strong>John Doe</strong></a>
