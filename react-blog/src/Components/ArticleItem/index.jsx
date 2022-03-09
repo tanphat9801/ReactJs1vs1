@@ -38,7 +38,7 @@ const ArticleItem = (
 
                     {showDesc && <ArticleDesc/>}
 
-                    <ArticleItemInfo showAvatar={isShowAvatar} />
+                    <ArticleItemInfo showAvatar={isShowAvatar}/>
                 </div>
         </article>
         </>
