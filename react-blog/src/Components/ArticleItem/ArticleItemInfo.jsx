@@ -1,10 +1,10 @@
 import "./article-item.css"
 import ArticleAvatar from "./ArticleItemAvatar";
-const ArticleItemInfo = () => {
+const ArticleItemInfo = ({isShowAvatar}) => {
     return ( 
         <>
                     <div className="article-item__info">
-                        <ArticleAvatar/>
+                        { isShowAvatar && <ArticleAvatar/> }
                         <div className="article-item__info-right">
                             <div className="article-item__author-name">
                             <a href="/"><strong>John Doe</strong></a>

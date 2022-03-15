@@ -16,27 +16,27 @@ const ArticleNewList = () => {
           <div className="tcl-row">
 
             <div className="tcl-col-12 tcl-col-md-6">
-                <ArticleItem styleCard showAvatar={false} />
+                <ArticleItem styleCard isShowAvatar={false} />
             </div>
 
             <div className="tcl-col-12 tcl-col-md-6">
-                <ArticleItem styleCard showAvatar={false} />
+                <ArticleItem styleCard isShowAvatar={false} />
             </div>
 
             <div className="tcl-col-12 tcl-col-md-6">
-                <ArticleItem styleCard showAvatar={false} />
+                <ArticleItem styleCard isShowAvatar={false} />
             </div>
 
             <div className="tcl-col-12 tcl-col-md-6">
-                <ArticleItem styleCard showAvatar={false} />
+                <ArticleItem styleCard isShowAvatar={false} />
             </div>
 
             <div className="tcl-col-12 tcl-col-md-6">
-                <ArticleItem styleCard showAvatar={false} />
+                <ArticleItem styleCard isShowAvatar={false} />
             </div>
 
             <div className="tcl-col-12 tcl-col-md-6">
-                <ArticleItem styleCard showAvatar={false} />
+                <ArticleItem styleCard isShowAvatar={false} />
             </div>
 
           </div>
