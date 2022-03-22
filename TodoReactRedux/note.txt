@@ -1,0 +1,39 @@
+App		strSearch
+
+
+		Button Go		->  strSearch (App) = X			-> App.handleSearh()
+		Button Clear	-> 	strSearch (App) = ''
+
+
+App 	>>>>>>>>>>>>>>>> 						Control 			>>>>>>>>>>>>>> 						Search
+		onClickSearchGo={this.handleSearh}						onClickGo={Control.onClickSearchGo}
+																onClickGo={App.handleSearh}
+
+redux :
+
+store 
+reducer 
+action 
+state 
+
+//appreducer dong vai tro la mot reducer se co hai gia tri state va action 
+// state duoc gan voi bien chua cac state can xu ly
+//getstate lay ra nhung state co trong store
+
+//=>> store se chua nhung state mac dinh 
+
+//=>> action => store => appreducer => new state 
+
+//dispath goi den store 
+
+// subcribe khi store thay doi thi no se cap nhat lai 
+
+Provider là bộ phận cung cấp dữ liệu cho file chạy chính(App)
+trong Provider sẽ có kho chứa(file store.js)
+
+//connect(null, null) kết nối từ list đến store 
+
+
+
+
+
