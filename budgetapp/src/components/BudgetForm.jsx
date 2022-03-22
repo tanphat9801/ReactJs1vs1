@@ -1,13 +1,18 @@
 import '../assets/style.css'
-import {useState} from 'react'
-import cls from 'classnames'
+import {useState, useRef} from 'react'
+import cls from 'classnames';
+import { useDispatch } from 'react-redux'
+import { actAddIncome } from '../stores/action';
+import DateTimePicker from 'react-datetime-picker';
 
 const BudgetForm = () => {
-
+    const dispatch = useDispatch()
+    const refDesc = useRef(null)
     const [formData, setFormData] = useState({
         sign: '+',
         desc: '',
-        amount : ''
+        amount : '', 
+        date: ''
     })
 
     //khai bao function onchange
@@ -34,7 +39,35 @@ const BudgetForm = () => {
         })
     }
 
+    //submit them moi gia tri 
+    function hanldeSubmit(){
+        // console.log('handle submit', formData);
+        if(!formData.amount || !formData.desc){
+            return
+        }
+        // console.log("formdata", formData);
+        dispatch(actAddIncome(formData))
+        setFormData({
+            sign: '+',
+            desc: '',
+            amount: ''
+        })
+
+        refDesc.current.focus()
+    }
+
+    //keyup value ênter 
+    function handleKeyUpAmount(event){
+        // console.log('handle key up ',event.key);
+        if(event.key === "Enter"){
+            hanldeSubmit()
+        }
+    }
+
+    const [value, onChange] = useState(new Date());
+
     const showRed = formData.sign === "-"
+    // console.log('usefred', refDesc.current.focus());
     return ( 
 
         <>     
@@ -59,6 +92,7 @@ const BudgetForm = () => {
                       className={cls("add__description",{
                           'red-focus' : showRed
                       })}
+                      ref={refDesc}
                       placeholder="Add description"
                       onChange={hanldeChangeData}
                       name="desc" />
@@ -68,11 +102,17 @@ const BudgetForm = () => {
                       className={cls("add__value",{
                         'red-focus' : showRed
                     })}
+                      onKeyUp={handleKeyUpAmount}
                       placeholder="Value"
                       onChange={hanldeChangeData}
                       name="amount"
                     />
-                    <button className={cls("add__btn",{
+                    
+                    <div>
+                        <DateTimePicker name='date' onChange={onChange} value={value} />
+                    </div>
+
+                    <button onClick={hanldeSubmit} className={cls("add__btn",{
                           'red' : showRed
                       })}>
                           <i className="ion-ios-checkmark-outline" />

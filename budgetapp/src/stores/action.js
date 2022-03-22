@@ -1,14 +1,16 @@
 // action type 
-const ACT_ADD_INCOME = 'ACT_ADD_INCOME'
+export const ACT_ADD_INCOME = 'ACT_ADD_INCOME'
 export const ACT_DELETE_INCOME = 'ACT_DELETE_INCOME'
 
 //action creator 
 
-export function actAddIncome (){
+export function actAddIncome (data){
     return{
 
         type: ACT_ADD_INCOME,
-        payload: null
+        payload: {
+            data
+        }
 
     }
 }

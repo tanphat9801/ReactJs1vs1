@@ -122,6 +122,9 @@ body {
 .add__container {
     margin: 0 auto;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .add__type {
