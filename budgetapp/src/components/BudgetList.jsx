@@ -1,12 +1,14 @@
 import "../assets/style.css"
 import BudgetIncome from "./BudgetIncome";
 import BudgetExpenses from "./BudgetExpenses";
-import useBudgetData from "../Hook/useBudgetData"
+import useBudgetData from "../Hook/useBudgetData";
 
 const BudgetList = () => {
-
-    const { listIncome, listExpenses , totalIncome } = useBudgetData()
-
+    const {
+        listIncome,
+        listExpenses,
+        totalIncome
+    } = useBudgetData()
     return ( 
 
         <>

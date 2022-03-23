@@ -4,16 +4,16 @@ import { totalAmount } from "../components/helper";
     function useBudgetData(){
         const listData = useSelector(state => state.listData)
 
-        const listlIncome = listData.filter(dataItems => dataItems.amount > 0)
+        const listIncome = listData.filter(dataItems => dataItems.amount > 0)
         const listExpenes = listData.filter(dataItems => dataItems.amount < 0)
 
-        const totalAmountIncome = totalAmount(listlIncome)
+        const totalAmountIncome = totalAmount(listIncome)
         const totalAmountExpenses = totalAmount(listExpenes)
 
         const  totalINEX = totalAmountIncome + totalAmountExpenses
 
         return{
-            listlIncome, 
+            listIncome, 
             listExpenes,
             totalAmountIncome,
             totalAmountExpenses,
@@ -22,4 +22,4 @@ import { totalAmount } from "../components/helper";
     }
 
 
-export default useBudgetData
+export default useBudgetData;
