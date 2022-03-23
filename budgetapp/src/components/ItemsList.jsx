@@ -1,27 +1,26 @@
 import "../assets/style.css"
-import { formatAmount, formatPercentAmount } from "./helper";
+import { formatAmount, formatDateString, formatPercentAmount } from "./helper";
 import { useDispatch } from "react-redux";
 import { actDeleteById } from "../stores/action";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ItemsList = ({data, total}) => {
-    const { amount, desc, id } = data
+    const { amount, desc, id, date } = data
     const dispatch = useDispatch()
     function handleDeleteItems(){
         alert('Bạn muốn xóa phần tử khỏi danh sách!!!')
         dispatch(actDeleteById(id))
-        // console.log("check id", id);
         //goi den action actionDeleteById 
     }
-    const notify = () => toast.success("Xóa thành công!");
+    const notify = () => toast.danger("Xóa thành công!");
 
     return ( 
-
+ 
         <>
         
                 <div className="item clearfix">
-                    <div className="item__description">{desc}</div>
+                    <div className="item__description">{desc} - {formatDateString(date)}</div>
                     <div className="right clearfix">
                         <div className="item__value">{formatAmount(amount)}</div>
                         {
@@ -46,7 +45,6 @@ const ItemsList = ({data, total}) => {
                         draggable
                         pauseOnHover
                         />
-                        
                     </div>
                 </div>
         

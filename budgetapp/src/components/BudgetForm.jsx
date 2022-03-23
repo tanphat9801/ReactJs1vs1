@@ -4,6 +4,9 @@ import cls from 'classnames';
 import { useDispatch } from 'react-redux'
 import { actAddIncome } from '../stores/action';
 import DateTimePicker from 'react-datetime-picker';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const BudgetForm = () => {
     const dispatch = useDispatch()
@@ -12,7 +15,7 @@ const BudgetForm = () => {
         sign: '+',
         desc: '',
         amount : '', 
-        date: ''
+        date: new Date()
     })
 
     //khai bao function onchange
@@ -50,7 +53,8 @@ const BudgetForm = () => {
         setFormData({
             sign: '+',
             desc: '',
-            amount: ''
+            amount: '',
+            date: new Date()
         })
 
         refDesc.current.focus()
@@ -64,9 +68,15 @@ const BudgetForm = () => {
         }
     }
 
-    const [value, onChange] = useState(new Date());
+    function onDateChange(date){
+        setFormData({
+            ...formData,
+            date: date  
+        })
+    }
 
     const showRed = formData.sign === "-"
+    const notify = () => toast.success("Thêm mới thành công!");
     // console.log('usefred', refDesc.current.focus());
     return ( 
 
@@ -109,14 +119,25 @@ const BudgetForm = () => {
                     />
                     
                     <div>
-                        <DateTimePicker name='date' onChange={onChange} value={value} />
+                        <DateTimePicker name='date' onChange={onDateChange} value={formData.date} />
                     </div>
 
                     <button onClick={hanldeSubmit} className={cls("add__btn",{
                           'red' : showRed
                       })}>
-                          <i className="ion-ios-checkmark-outline" />
+                          <i className="ion-ios-checkmark-outline" onClick={notify} />
                     </button>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={2000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        />
                 </div>
             </div>
         </>

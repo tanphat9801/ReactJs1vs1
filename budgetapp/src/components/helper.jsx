@@ -46,6 +46,17 @@ export function formatPercentAmount(amount , total){
     }
     return percent + '%';
 }
+
+export function formatDateString(date) {
+    if (date instanceof Date) {
+        const day = date.getDate()
+        const month = date.getMonth()
+        const year = date.getFullYear()
+
+        return `${day}/${month}/${year}`
+    }
+    return ''
+}
 //round dung de lam tron gia tri 
 // dk if dung de loai bo dau - 
 
