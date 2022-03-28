@@ -1,34 +1,18 @@
 import { v4 as uuidv4 } from "uuid";
 import { ACT_DELETE_INCOME, ACT_ADD_INCOME } from "./action";
 
+function getDataFromLocalStorage(){
+  try{
+    const dataFormLocalStorage = localStorage.getItem("listBudget") || []
+    return JSON.parse(dataFormLocalStorage)
+  }catch(err){
+    return []
+  }
+}
+
 const initialState = {
-  listData: [
-    {
-      id: uuidv4(),
-      desc: "chi tien mua do an",
-      amount: -100000,
-      date: new Date(),
-    },
-    {
-      id: uuidv4(),
-      desc: "thu nhap tien di lam",
-      amount: 5000000,
-      date: new Date(),
-    },
-    {
-      id: uuidv4(),
-      desc: "chi tien di choi",
-      amount: -200000,
-      date: new Date(),
-    },
-    {
-      id: uuidv4(),
-      desc: "tien thuong du an ",
-      amount: 3000000,
-      date: new Date(),
-    },
-  ],
-};
+  listData: getDataFromLocalStorage()
+}
 
 function reducer(state = initialState, action) {
   // console.log( 'action',action);

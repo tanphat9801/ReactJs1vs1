@@ -42,14 +42,12 @@ const BudgetForm = () => {
         })
     }
 
-    //submit them moi gia tri 
     function hanldeSubmit(){
-        // console.log('handle submit', formData);
         if(!formData.amount || !formData.desc){
             return
         }
-        // console.log("formdata", formData);
         dispatch(actAddIncome(formData))
+
         setFormData({
             sign: '+',
             desc: '',
@@ -60,7 +58,6 @@ const BudgetForm = () => {
         refDesc.current.focus()
     }
 
-    //keyup value ênter 
     function handleKeyUpAmount(event){
         // console.log('handle key up ',event.key);
         if(event.key === "Enter"){
@@ -71,13 +68,12 @@ const BudgetForm = () => {
     function onDateChange(date){
         setFormData({
             ...formData,
-            date: date  
+            date:date  
         })
     }
 
     const showRed = formData.sign === "-"
     const notify = () => toast.success("Thêm mới thành công!");
-    // console.log('usefred', refDesc.current.focus());
     return ( 
 
         <>     

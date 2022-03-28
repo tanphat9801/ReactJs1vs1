@@ -3,18 +3,17 @@ import BudgetIncome from "./BudgetIncome";
 import BudgetExpenses from "./BudgetExpenses";
 import useBudgetData from "../Hook/useBudgetData";
 
+
 const BudgetList = () => {
-    const {
-        listIncome,
-        listExpenses,
-        totalIncome
-    } = useBudgetData()
+    const {listIncome, listExpenes , totalAmountIncome} = useBudgetData()
+
+
     return ( 
 
         <>
             <div className="container clearfix">
                 <BudgetIncome dataItems={listIncome} />
-                <BudgetExpenses dataItems={listExpenses} total={totalIncome}/>  
+                <BudgetExpenses dataItems={listExpenes} total={ totalAmountIncome}/>  
             </div>
           
         </>

@@ -13,14 +13,14 @@ const ItemsList = ({data, total}) => {
         dispatch(actDeleteById(id))
         //goi den action actionDeleteById 
     }
-    const notify = () => toast.danger("Xóa thành công!");
+    const notify = () => toast.warning("Xóa thành công!");
 
     return ( 
  
         <>
         
                 <div className="item clearfix">
-                    <div className="item__description">{desc} - {formatDateString(date)}</div>
+                    <div className="item__description">{desc} -  {formatDateString(date)}</div>
                     <div className="right clearfix">
                         <div className="item__value">{formatAmount(amount)}</div>
                         {

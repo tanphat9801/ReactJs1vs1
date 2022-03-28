@@ -6,12 +6,10 @@ import TotalExpenses from "./TotalExpenses";
 import useBudgetData from "../Hook/useBudgetData";
 
 
+
+
 const BudgetHeader = () => {
-    const {
-          totalINEX,
-          totalAmountIncome,
-          totalAmountExpenses      
-    } = useBudgetData()
+    const {totalINEX, totalAmountIncome, totalAmountExpenses} = useBudgetData()
     return ( 
 
         <div className="top">

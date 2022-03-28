@@ -2,6 +2,7 @@ import "../assets/style.css"
 import { formatAmount, formatPercentAmount } from "./helper";
 
 const ToatalExpenses = ({amount, total}) => {
+
     return ( 
 
         <>

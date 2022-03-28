@@ -1,6 +1,8 @@
 import "../assets/style.css"
 import ItemsList from "./ItemsList";
 const BudgetExpenses = ({dataItems, total}) => {
+    // console.log(dataItems);
+    // console.log(total);
     return ( 
 
         <>
