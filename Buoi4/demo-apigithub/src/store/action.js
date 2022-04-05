@@ -4,6 +4,7 @@ export const ACT_GET_LIST_POST_SYNC = "ACT_GET_LIST_POST_SYNC";
 
 // action creator
 export function actGetListPostSync(posts) {
+  console.log(posts);
   return {
     type: "ACT_GET_LIST_POST_SYNC",
     payload: {
