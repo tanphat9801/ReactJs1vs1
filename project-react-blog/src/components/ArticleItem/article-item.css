@@ -209,7 +209,7 @@
     .article-item__datetime .time {
       display: inline-block; }
       .article-item__datetime .time::before {
-        content: ' . ';
+        content: '';
         display: inline-block; }
   .article-item.style-card {
     background-color: #fff;

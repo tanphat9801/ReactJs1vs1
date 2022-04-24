@@ -13,26 +13,46 @@ const ArticleItem = ({
   showDesc = false,
   showCategories = false,
   isShowAvatar = true,
+  post,
 }) => {
   const classes = cls("article-item", {
     "style-card": styleCard,
     "style-row": styleRow,
   });
 
+  if (!post) {
+    return null;
+  }
+
+  const { title, author, thumbnail, createDate, slug, authorId, categoriesId, viewCount, shortHTMLDesc } =
+    post;
+
+  const slugLink = "/post/" + slug;
+  const authorLink = "/user/" + authorId;
+
   return (
     <>
       <article className={classes}>
-        <ArticleThumbnail />
+        <ArticleThumbnail
+          thumbnail={thumbnail}
+          slugLink={slugLink}
+          title={title}
+        />
         <div className="article-item__content">
-          {showCategories && <ArticleCategory />}
+          {showCategories && <ArticleCategory categoriesId={categoriesId} />}
 
-          {showCategories && <ArticleStats />}
+          {showCategories && <ArticleStats viewCount={viewCount} />}
 
-          <ArticleTitle />
+          <ArticleTitle title={title} slugLink={slugLink} />
 
-          {showDesc && <ArticleDesc />}
+          {showDesc && <ArticleDesc shortHTMLDesc={shortHTMLDesc} />}
 
-          <ArticleItemInfo isShowAvatar={isShowAvatar} />
+          <ArticleItemInfo
+            author={author}
+            createDate={createDate}
+            isShowAvatar={isShowAvatar}
+            authorLink={authorLink}
+          />
         </div>
       </article>
     </>
@@ -40,3 +60,5 @@ const ArticleItem = ({
 };
 
 export default ArticleItem;
+
+//sluglink nguoi dung co the click tu 1 tam anh hoac title de den duoc bai viet

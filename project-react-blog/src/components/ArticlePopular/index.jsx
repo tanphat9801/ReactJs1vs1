@@ -2,8 +2,11 @@ import "./popular-news-list.css";
 import "./article-item.css";
 import ArticleItem from "../ArticleItem";
 import MainTitle from "../../shared/MainTitle/MainTitle";
+import { useSelector } from "react-redux";
 
 const ArticlePopular = () => {
+  const posts = useSelector((state) => state.Post.ArticlePopular);
+
   return (
     <>
       {/* Popular News Section */}
@@ -20,12 +23,22 @@ const ArticlePopular = () => {
               <div className="popular-news__list--row">
                 {/* Popular news card */}
                 <div className="popular-news__list--card">
-                  <ArticleItem styleCard showDesc showCategories />
+                  <ArticleItem
+                    styleCard
+                    showDesc
+                    showCategories
+                    post={posts[0]}
+                  />
                 </div>
                 {/* End Popular news card */}
                 {/* Popular news card */}
                 <div className="popular-news__list--card">
-                  <ArticleItem styleCard showDesc showCategories />
+                  <ArticleItem
+                    styleCard
+                    showDesc
+                    showCategories
+                    post={posts[1]}
+                  />
                 </div>
                 {/* End Popular news card */}
               </div>
@@ -34,7 +47,13 @@ const ArticlePopular = () => {
               <div className="popular-news__list--row">
                 {/* Popular news card */}
                 <div className="popular-news__list--card">
-                  <ArticleItem styleCard styleRow showDesc showCategories />
+                  <ArticleItem
+                    styleCard
+                    styleRow
+                    showDesc
+                    showCategories
+                    post={posts[2]}
+                  />
                 </div>
                 {/* End Popular news card */}
               </div>

@@ -6,7 +6,15 @@ import LoginPage from "./page/LoginPage/index";
 import RegisterPage from "./page/RegisterPage";
 import SearchPage from "./page/SearchPage/SearchPage";
 import PostDetailPage from "./page/PostDetailPage";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { actArticleCategoryAsync } from "./stores/Category/action";
+
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+      dispatch(actArticleCategoryAsync())
+  },[dispatch]);
   return (
     <BrowserRouter>
       <div className="wrapper-content">

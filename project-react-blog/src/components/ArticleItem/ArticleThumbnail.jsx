@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import "./article-item.css";
 
-const ArticleThumbnail = () => {
+const ArticleThumbnail = ({ thumbnail, slugLink, title }) => {
   return (
     <>
       <div className="article-item__thumbnail">
-        <a href="/">
-          <img src="/assets/images/blog-1.jpg" alt="assets/images/blog-1.jpg" />
-        </a>
+        <Link to={slugLink}>
+          <img src={thumbnail} alt={title} />
+        </Link>
       </div>
     </>
   );

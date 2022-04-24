@@ -3,6 +3,8 @@ import "./css/comments.css"
 import "./css/post-author.css"
 import "./css/related-posts.css"
 
+import Button from "../../shared/Button/Button"
+
 const PostDetailContent = () => {
   return (
     <>
@@ -49,7 +51,7 @@ const PostDetailContent = () => {
                 &lt; arguments.length; i++) {"{"}
                 {"\n"}
                 {"  "}args.push(arguments[i]){"\n"}
-                {"}"} // Now 'args' is an array that holds your arguments.{"\n"}
+                {"}"}  Now 'args' is an array that holds your arguments.{"\n"}
                 console.log(args);
               </code>
             </pre>
@@ -81,24 +83,16 @@ const PostDetailContent = () => {
             <h2>Tags</h2>
             <ul>
               <li className="item">
-                <a href="/" className="btn btn-default">
-                  HTML
-                </a>
+    	          <Button type="default">HTML</Button>
               </li>
               <li className="item">
-                <a href="/" className="btn btn-default">
-                  CSS3
-                </a>
+    	          <Button type="default">HTML</Button>
               </li>
               <li className="item">
-                <a href="/" className="btn btn-default">
-                  React
-                </a>
+    	          <Button type="default">REACT</Button>
               </li>
               <li className="item">
-                <a href="/" className="btn btn-default">
-                  Vue
-                </a>
+    	          <Button type="default">VUE</Button>
               </li>
             </ul>
           </div>
@@ -115,7 +109,7 @@ const PostDetailContent = () => {
                 <textarea name defaultValue={""} />
               </div>
               <div className="text-right">
-                <button className="btn btn-default">Submit</button>
+                <Button>Submit</Button>
               </div>
             </div>
             <p>20 Comments</p>

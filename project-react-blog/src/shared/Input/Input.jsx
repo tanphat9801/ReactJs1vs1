@@ -2,7 +2,7 @@ import "./login.css";
 import cls from "classnames";
 import { useState } from "react";
 import IconSearch from "./IconSearch";
-const Input = ({ label, className, type = "text", ...restProps }) => {
+const Input = ({ label, className, type = "text", error, ...restProps }) => {
   const [localType, setLocalType] = useState(type);
 
   function handleShowEyes() {
@@ -18,29 +18,32 @@ const Input = ({ label, className, type = "text", ...restProps }) => {
     "ion-eye-disabled": localType === "text",
   });
 
-  const classSearch = cls("input-search__input", className)
+  const classSearch = cls("input-search__input", className);
 
   if (type === "search") {
     return (
       <div className="input-search">
         <IconSearch />
-        <input
-          className={classSearch}
-          type={localType}
-          {...restProps}
-        />
+        <input className={classSearch} type={localType} {...restProps} />
       </div>
     );
   }
 
   return (
     <>
-      <div className="form-control">
+      <div
+        className={cls("form-control", {
+          "form-control_has-error": error,
+        })}
+      >
         {label && <label>{label}</label>}
-        {type === "password" && (
-          <i className={classesIcon} onClick={handleShowEyes}></i>
-        )}
-        <input type={localType} {...restProps} className={className} />
+        <div className="form-control_wrapper">
+          {type === "password" && (
+            <i className={classesIcon} onClick={handleShowEyes}></i>
+          )}
+          <input type={localType} {...restProps} className={className} />
+        </div>
+        {error && <span className="form-control_error">{error}</span>}
       </div>
     </>
   );
