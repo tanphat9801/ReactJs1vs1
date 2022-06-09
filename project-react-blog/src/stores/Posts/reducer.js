@@ -1,7 +1,9 @@
 import {
-  ACT_ARTICLE_GENERAL,
+  ACT_ARTICLES,
   ACT_ARTICLE_LATEST,
   ACT_ARTICLE_POPULAR,
+  ACT_POST_DETAIL,
+  ACT_RELATEST_POST,
 } from "./action";
 
 const initState = {
@@ -11,11 +13,13 @@ const initState = {
     list: [],
     currentPage: 1,
   },
+  PostDetail: null,
+  RelatestPostByAuthor: [],
 };
 
 function reducer(postState = initState, action) {
   switch (action.type) {
-    case ACT_ARTICLE_GENERAL:
+    case ACT_ARTICLES:
       return {
         ...postState,
         ArticlePaging: {
@@ -26,7 +30,7 @@ function reducer(postState = initState, action) {
               : [...postState.ArticlePaging.list, ...action.payload.posts],
           currentPage: action.payload.currentPage,
           total: action.payload.total,
-          totalPages: action.payload.totalPages
+          totalPages: action.payload.totalPages,
         },
       };
     case ACT_ARTICLE_LATEST:
@@ -41,6 +45,16 @@ function reducer(postState = initState, action) {
         ArticlePopular: action.payload.posts,
       };
 
+    case ACT_POST_DETAIL:
+      return {
+        ...postState,
+        PostDetail: action.payload.post,
+      };
+    case ACT_RELATEST_POST:
+      return {
+        ...postState,
+        RelatestPostByAuthor: action.payload.posts,
+      };
     default:
       return postState;
   }

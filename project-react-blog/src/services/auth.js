@@ -7,6 +7,14 @@ export const authService = {
       password,
     });
   },
+  register({ nickname, username, email, password }) {
+    return api.call().post("/wp/v2/users/register", {
+      nickname,
+      username,
+      email,
+      password,
+    });
+  },
   fetchAPI(token) {
     return api.call().get("/wp/v2/users/me", {
       headers: {

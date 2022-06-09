@@ -2,6 +2,8 @@ import { ACT_ARTICLE_CATEGORY } from "./action";
 
 const initState = {
   hashCategoryById: {},
+  hashTagsById: {},
+  isFetch: false,
 };
 
 function reducer(stateCategory = initState, action) {
@@ -9,6 +11,7 @@ function reducer(stateCategory = initState, action) {
     case ACT_ARTICLE_CATEGORY:
       return {
         ...stateCategory,
+        isFetch: true,
         hashCategoryById: action.payload.hashCategoryById,
       };
     default:

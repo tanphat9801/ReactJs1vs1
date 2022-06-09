@@ -1,12 +1,16 @@
-import { mapingPostData } from "../../Helper";
+import { mapingPostData, mappingPostDetail } from "../../Helper";
 import postService from "../../services/post";
+import { actFetchCommentsAsync } from "../Comments/action";
 
-//action type
+//action type article
 export const ACT_ARTICLE_LATEST = "ACT_ARTICLE_LATEST";
 export const ACT_ARTICLE_POPULAR = "ACT_ARTICLE_POPULAR";
-export const ACT_ARTICLE_GENERAL = "ACT_ARTICLE_GENERAL";
+export const ACT_ARTICLES = "ACT_ARTICLES";
 
-//////////////////////////
+// action type postdetail
+
+export const ACT_POST_DETAIL = "ACT_POST_DETAIL";
+export const ACT_RELATEST_POST = "ACT_RELATEST_POST";
 
 //action creator latest
 export function actArticleLatest(posts) {
@@ -29,11 +33,11 @@ export function actArticlePopular(posts) {
   };
 }
 
-//actiom creator general
+//action creator general
 
-export function actArticleGeneral({ posts, currentPage, total, totalPages }) {
+export function actFetchArticle({ posts, currentPage, total, totalPages }) {
   return {
-    type: ACT_ARTICLE_GENERAL,
+    type: ACT_ARTICLES,
     payload: {
       posts,
       currentPage,
@@ -42,6 +46,27 @@ export function actArticleGeneral({ posts, currentPage, total, totalPages }) {
     },
   };
 }
+
+//action postdetail
+export const actPostDetail = (post) => {
+  return {
+    type: ACT_POST_DETAIL,
+    payload: {
+      post,
+    },
+  };
+};
+
+// action relatest
+
+export const actRealatestPost = (posts) => {
+  return {
+    type: ACT_RELATEST_POST,
+    payload: {
+      posts,
+    },
+  };
+};
 
 ////////////////////////////////////////
 
@@ -75,19 +100,66 @@ export function actArticlePopularAsync() {
 
 // action sync general
 
-export function actArticleGeneralAsync({ currentPage = 1, perPage = 2 } = {}) {
+export function actArticlesAsync({
+  currentPage = 1,
+  perPage = 2,
+  ...restParams
+} = {}) {
   return async (dispatch) => {
     try {
-      const response = await postService.getArticleGeneral({
+      // console.log("restParams", restParams);
+      const response = await postService.getArticles({
         currentPage,
         perPage,
-      });
+        ...restParams,
+      }); //restparams sẽ phân rã các thuộc tính sau này có thể xây dựng thêm(vd là thuộc tính search)
       const total = Number(response.headers["x-wp-total"]);
       const totalPages = Number(response.headers["x-wp-totalpages"]);
       const posts = response.data.map(mapingPostData);
-      dispatch(actArticleGeneral({ posts, currentPage, total, totalPages }));
+      dispatch(actFetchArticle({ posts, currentPage, total, totalPages }));
     } catch (error) {
       //todos
     }
   };
 }
+//actArticlesAsync được tái sử dụng ở nhiều nơi
+
+//action post detail async
+
+export const actPostDetailAsync = (slug) => {
+  return async (dispatch) => {
+    try {
+      const response = await postService.getDetail(slug);
+      const post = response.data[0];
+      if (!post) {
+        throw new Error("post not found");
+      }
+
+      const postId = post.id;
+      const authorId = post.author;
+
+      dispatch(actPostDetail(mappingPostDetail(post)));
+      dispatch(actFetchCommentsAsync({ postId })); // dung chung gia tri postId, khong lien quan den ca action khac
+      await dispatch(actRelatestPostAsync({ postId, authorId }));
+      return { ok: true };
+    } catch (error) {
+      return { ok: false };
+    }
+  };
+};
+
+//action relatest post async
+
+export const actRelatestPostAsync = ({ postId, authorId }) => {
+  return async (dispatch) => {
+    try {
+      const response = await postService.getList({
+        author: authorId,
+        exclude: postId,
+        per_page: 3,
+      });
+      const posts = response.data.map(mapingPostData);
+      dispatch(actRealatestPost(posts));
+    } catch (error) {}
+  };
+};

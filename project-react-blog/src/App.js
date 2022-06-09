@@ -9,19 +9,34 @@ import PostDetailPage from "./page/PostDetailPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { actArticleCategoryAsync } from "./stores/Category/action";
+import { actFetchAPIAsync } from "./stores/Auth/action";
+import SearchCategory from "./page/SearchCategory/SearchCategory";
+import { actMainMenuAsync } from "./stores/Menu/action";
+import { ROUTER_POST } from "./constants";
+import { actFetchTagsAsync } from "./stores/TagsPostDetail/action";
+import SearchTags from "./page/SearchTags/SearchTags";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(actArticleCategoryAsync())
-  },[dispatch]);
+    dispatch(actArticleCategoryAsync());
+    dispatch(actFetchAPIAsync());
+    dispatch(actMainMenuAsync());
+    dispatch(actFetchTagsAsync());
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <div className="wrapper-content">
         <Header />
         <Switch>
-          <Route path="/post/:slug">
+          <Route path={ROUTER_POST}>
             <PostDetailPage />
+          </Route>
+          <Route path="/tag/:slug">
+            <SearchTags />
+          </Route>
+          <Route path="/category/:slug">
+            <SearchCategory />
           </Route>
           <Route path="/search">
             <SearchPage />

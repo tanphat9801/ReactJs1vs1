@@ -1,34 +1,9 @@
 import "./article-item.css";
 import MainTitle from "../../shared/MainTitle/MainTitle";
 import ArticleItem from "../ArticleItem";
-import Button from "../../shared/Button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { actArticleGeneralAsync } from "../../stores/Posts/action";
+import { usePostPaging } from "../../hooks/usePostPaging";
 const ArticleList = () => {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const {
-    list: posts,
-    currentPage,
-    totalPages,
-  } = useSelector((state) => state.Post.ArticlePaging);
-
-  const hasMore = currentPage < totalPages;
-
-  function handleLoadMore() {
-    if (loading) {
-      return;
-    }
-
-    setLoading(true);
-    const param = {
-      currentPage: currentPage + 1,
-    };
-    dispatch(actArticleGeneralAsync(param)).then(() => {
-      setLoading(false);
-    });
-  }
+  const { posts, renderButton } = usePostPaging();
 
   return (
     <>
@@ -56,20 +31,9 @@ const ArticleList = () => {
             })}
           </div>
           {/* End Row News List */}
-          {/* Btn Loadmore */}
 
-          {hasMore && (
-            <div className="text-center">
-              <Button
-                type="primary"
-                onClick={handleLoadMore}
-                size="large"
-                loading={loading}
-              >
-                Load more
-              </Button>
-            </div>
-          )}
+          {/* Btn Loadmore */}
+          {renderButton()}
         </div>
       </div>
     </>

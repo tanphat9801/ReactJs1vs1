@@ -6,6 +6,7 @@ import ArticleCategory from "./ArticleCategories";
 import ArticleDesc from "./ArticleDesc";
 import ArticleItemInfo from "./ArticleInfo";
 import ArticleStats from "./ArticleStarts";
+import { genPostLink, genUserLink } from "../../Helper";
 
 const ArticleItem = ({
   styleRow = false,
@@ -24,11 +25,20 @@ const ArticleItem = ({
     return null;
   }
 
-  const { title, author, thumbnail, createDate, slug, authorId, categoriesId, viewCount, shortHTMLDesc } =
-    post;
+  const {
+    title,
+    author,
+    thumbnail,
+    createDate,
+    slug,
+    authorId,
+    categoriesId,
+    viewCount,
+    shortHTMLDesc,
+  } = post;
 
-  const slugLink = "/post/" + slug;
-  const authorLink = "/user/" + authorId;
+  const slugLink = genPostLink(slug);
+  const authorLink = genUserLink(authorId);
 
   return (
     <>

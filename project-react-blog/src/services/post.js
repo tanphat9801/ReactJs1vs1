@@ -22,10 +22,16 @@ const postService = {
       oderby: "post_view",
     });
   },
-  getArticleGeneral({ currentPage = 1, perPage = 2 } = {}) {
+  getArticles({ currentPage = 1, perPage = 2, ...restParams } = {}) {
     return postService.getList({
       page: currentPage,
       per_page: perPage,
+      ...restParams,
+    });
+  },
+  getDetail(slug) {
+    return postService.getList({
+      slug
     });
   },
 };

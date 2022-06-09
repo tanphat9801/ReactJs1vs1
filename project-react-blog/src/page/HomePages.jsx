@@ -4,7 +4,7 @@ import ArticleList from "../components/ArticleList";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
-  actArticleGeneralAsync,
+  actArticlesAsync,
   actArticleLatestAsync,
   actArticlePopularAsync,
 } from "../stores/Posts/action";
@@ -14,7 +14,7 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(actArticleLatestAsync());
     dispatch(actArticlePopularAsync());
-    dispatch(actArticleGeneralAsync());
+    dispatch(actArticlesAsync());
   }, [dispatch]);
   return (
     <>

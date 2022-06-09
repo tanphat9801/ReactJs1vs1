@@ -5,4 +5,4 @@
 * => process.env.tên biến đặt ở .env 
 
 ## quy trình để xử lý tính năng bài viết 
-* Service -> Store(post -> action) ->reducer
+* Service -> Store(post -> action) ->reducer 

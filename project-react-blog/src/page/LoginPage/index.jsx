@@ -8,19 +8,21 @@ import { useDispatch } from "react-redux";
 import { validateFormData } from "../../Helper";
 import { actAuthLoginAsync } from "../../stores/Auth/action";
 import { useHistory } from "react-router-dom";
+import { useNotAuth } from "../../hooks/useNotAuth";
 const LoginPage = () => {
+  useNotAuth()
   const dispatch = useDispatch();
   const history = useHistory();
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isDirty, setIsDirty] = useState(true);
+  const [isDirty, setIsDirty] = useState(false);
   const [formData, setFormData] = useState({
     username: {
-      value: "congluc1902",
+      value: "",
       error: "",
     },
     password: {
-      value: "123456",
+      value: "",
       error: "",
     },
   });
@@ -86,11 +88,9 @@ const LoginPage = () => {
       if (res.check) {
         history.push("/");
       } else {
-        console.log("that bai", res.error);
         setFormError(res.error);
+        setLoading(false);
       }
-
-      setLoading(false);
     });
   };
 
