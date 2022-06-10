@@ -1,27 +1,37 @@
+import { useCommentPaging } from "../../hooks/useCommentParent";
 import CommentAction from "./CommentAction";
 import CommentItemChild from "./CommentItemChild";
 import "./css/post-detail.css";
 import FormReply from "./FormReply";
 
 const CommentsItem = (props) => {
-  const parentId = props.parentId === 0;
+  const thisParentId = props.parentId === 0;
+
+  const { comments: replyComment, handleLoadMore } = useCommentPaging({
+    parentId: props.comment.id,
+  });
 
   return (
     <>
       <li className="item">
         <CommentItemChild comment={props.comment} />
         {/* {reply comments} */}
-        {parentId && false && (
+        {thisParentId && false && (
           <ul className="comments">
             <CommentsItem parentId={5555} />
             <CommentsItem parentId={4444} />
           </ul>
         )}
 
-        {parentId && <CommentAction count={20} />}
+        {thisParentId && props.comment.replyCount > 0 && (
+          <CommentAction
+            count={props.comment.replyCount}
+            onClick={handleLoadMore}
+          />
+        )}
 
         {/* reply form  */}
-        {parentId && false && <FormReply />}
+        {thisParentId && false && <FormReply />}
       </li>
     </>
   );

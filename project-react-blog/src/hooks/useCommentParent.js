@@ -7,11 +7,11 @@ const fnPostIdSelector = (state) =>
 
 const fnParentPaging = (state) => state.Comments.commentParentPaging;
 
-export const useCommentPaging = ({
-  extraParam = {}, //co the truyen cac tham so khac vao de mo rong vd nhu la search
-} = {}) => {
+const childParentPaging = (state, parentId) =>
+  state.Comments.hasChildPaging[parentId];
+
+export const useCommentPaging = ({ parentId = 0, extraParam = {} } = {}) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const postId = useSelector(fnPostIdSelector);
 
   const {
@@ -19,9 +19,16 @@ export const useCommentPaging = ({
     currentPage,
     totalPages,
     total,
-  } = useSelector(fnParentPaging);
+  } = useSelector((state) => {
+    if (parentId === 0) {
+      return fnParentPaging(state);
+    }
+    return childParentPaging(state, parentId);
+  });
 
   const hasMoreComments = currentPage < totalPages;
+
+  const [loading, setLoading] = useState(false);
 
   const handleLoadMore = () => {
     if (loading) {
@@ -31,8 +38,8 @@ export const useCommentPaging = ({
     setLoading(true);
     const param = {
       currentPage: currentPage + 1,
-      parent: 0,
-      postId: postId,
+      parentId,
+      postId,
       ...extraParam,
     };
     dispatch(actFetchCommentsAsync(param)).then(() => {

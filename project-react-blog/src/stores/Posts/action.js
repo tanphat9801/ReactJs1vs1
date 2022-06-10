@@ -139,8 +139,9 @@ export const actPostDetailAsync = (slug) => {
       const authorId = post.author;
 
       dispatch(actPostDetail(mappingPostDetail(post)));
-      dispatch(actFetchCommentsAsync({ postId })); // dung chung gia tri postId, khong lien quan den ca action khac
-      await dispatch(actRelatestPostAsync({ postId, authorId }));
+      dispatch(actFetchCommentsAsync({ postId })); 
+      // dung chung gia tri postId, khong lien quan den ca action khac
+      dispatch(actRelatestPostAsync({ postId, authorId }));
       return { ok: true };
     } catch (error) {
       return { ok: false };

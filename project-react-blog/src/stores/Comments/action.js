@@ -4,12 +4,19 @@ import CommentService from "../../services/comments";
 //action type
 export const ACT_FETCH_COMMENTS_DETAIL = "ACT_FETCH_COMMENTS_DETAIL";
 export const ACT_FETCH_CHILD_PAGING = "ACT_FETCH_CHILD_PAGING";
+export const ACT_FETCH_CHILD_REPLY = "ACT_FETCH_CHILD_REPLY";
 
 // action sync
 
-export function actFetchComment({ total, totalPages, comments, currentPage }) {
+export function actFetchComment({
+  total,
+  totalPages,
+  comments,
+  currentPage,
+  parentId,
+}) {
   return {
-    type: ACT_FETCH_COMMENTS_DETAIL,
+    type: parentId === 0 ? ACT_FETCH_COMMENTS_DETAIL : ACT_FETCH_CHILD_REPLY,
     payload: {
       total,
       totalPages,
@@ -50,19 +57,21 @@ export function actFetchCommentsAsync({
       const total = Number(response.headers["x-wp-total"]);
       const totalPages = Number(response.headers["x-wp-totalpages"]);
       const comments = response.data.map(mappingCommentsData);
+      
+      if (parentId === 0) {
+        dispatch(actFetchChildPaging({ comments }));
+      }
+
       dispatch(
         actFetchComment({
           total,
           totalPages,
           comments,
           currentPage,
+          parentId,
         })
       );
-
       //khi có ds bình luận cha dispatch tiếp tục act này để lấy về 1 ds bình luận con
-      if (parentId === 0) {
-        dispatch(actFetchChildPaging({ comments }));
-      }
     } catch (error) {}
   };
 }
