@@ -39,8 +39,8 @@ export const actFetchAPIAsync = (token) => {
         check: true,
       };
     } catch (err) {
-      // localStorage.removeItem(ACCESS_TOKEN);// bước này chỉ mới remove token ở localStorage 
-      dispatch(actLogout())//đây là bước xóa đi phần token ko hợp lệ bên trong store 
+      // localStorage.removeItem(ACCESS_TOKEN);// bước này chỉ mới remove token ở localStorage
+      dispatch(actLogout()); //đây là bước xóa đi phần token ko hợp lệ bên trong store
       return {
         check: false,
         error: "username hoac password khong hop le",

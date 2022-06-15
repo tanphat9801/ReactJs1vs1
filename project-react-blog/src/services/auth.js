@@ -21,5 +21,6 @@ export const authService = {
         Authorization: "Bearer " + token,
       },
     });
+    // return api.callWithToken().get("/wp/v2/users/me");
   },
 };

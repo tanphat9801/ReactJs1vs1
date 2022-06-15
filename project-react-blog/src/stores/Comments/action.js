@@ -3,7 +3,7 @@ import CommentService from "../../services/comments";
 
 //action type
 export const ACT_FETCH_COMMENTS_DETAIL = "ACT_FETCH_COMMENTS_DETAIL";
-export const ACT_FETCH_CHILD_PAGING = "ACT_FETCH_CHILD_PAGING";
+export const ACT_INIT_CHILDREN_PAGING = "ACT_INIT_CHILDREN_PAGING";
 export const ACT_FETCH_CHILD_REPLY = "ACT_FETCH_CHILD_REPLY";
 
 // action sync
@@ -22,14 +22,15 @@ export function actFetchComment({
       totalPages,
       comments,
       currentPage,
+      parentId,
     },
   };
 }
 
 // khởi tạo thêm 1 act để lấy thêm ds bình luận con dựa vào bình luận cha
-export function actFetchChildPaging({ comments }) {
+export function actInitChildrenPaging(comments) {
   return {
-    type: ACT_FETCH_CHILD_PAGING,
+    type: ACT_INIT_CHILDREN_PAGING,
     payload: {
       comments,
     },
@@ -57,9 +58,9 @@ export function actFetchCommentsAsync({
       const total = Number(response.headers["x-wp-total"]);
       const totalPages = Number(response.headers["x-wp-totalpages"]);
       const comments = response.data.map(mappingCommentsData);
-      
+
       if (parentId === 0) {
-        dispatch(actFetchChildPaging({ comments }));
+        dispatch(actInitChildrenPaging(comments));
       }
 
       dispatch(

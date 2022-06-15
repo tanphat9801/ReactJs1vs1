@@ -8,7 +8,7 @@ const fnPostIdSelector = (state) =>
 const fnParentPaging = (state) => state.Comments.commentParentPaging;
 
 const childParentPaging = (state, parentId) =>
-  state.Comments.hasChildPaging[parentId];
+  state.Comments.hasChildPaging[parentId] || { list: [] };// do bat dong bo trong js 
 
 export const useCommentPaging = ({ parentId = 0, extraParam = {} } = {}) => {
   const dispatch = useDispatch();

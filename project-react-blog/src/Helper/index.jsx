@@ -83,7 +83,7 @@ export const mappingCurrentUser = (user) => {
     id: user.id,
     nickname: user.nickname,
     email: user.email,
-    avatar: user.avatar_urls[24],
+    avatar: user.simple_local_avatar?.full || DEFAULT_AVATAR,
   };
 };
 

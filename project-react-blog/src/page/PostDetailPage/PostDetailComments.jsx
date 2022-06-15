@@ -18,7 +18,7 @@ const PostDetailComments = () => {
   return (
     <>
       <div className="post-detail__comments">
-        <FormReply />
+        <FormReply parentId={0} />
         <p>{total} Bình luận</p>
         {comments.length > 0 && (
           <ul className="comments">{comments.map(handleMapComments)}</ul>

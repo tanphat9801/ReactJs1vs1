@@ -7,7 +7,11 @@ import FormReply from "./FormReply";
 const CommentsItem = (props) => {
   const thisParentId = props.parentId === 0;
 
-  const { comments: replyComment, handleLoadMore } = useCommentPaging({
+  const {
+    comments: replyComment,
+    handleLoadMore,
+    loading,
+  } = useCommentPaging({
     parentId: props.comment.id,
   });
 
@@ -16,17 +20,24 @@ const CommentsItem = (props) => {
       <li className="item">
         <CommentItemChild comment={props.comment} />
         {/* {reply comments} */}
-        {thisParentId && false && (
+        {thisParentId && replyComment && replyComment.length > 0 && (
           <ul className="comments">
-            <CommentsItem parentId={5555} />
-            <CommentsItem parentId={4444} />
+            {replyComment.map((replyCmtItem) => {
+              return (
+                <CommentsItem
+                  parentId={props.comment.id}
+                  comment={replyCmtItem}
+                />
+              );
+            })}
           </ul>
         )}
 
-        {thisParentId && props.comment.replyCount > 0 && (
+        {thisParentId && replyComment && props.comment.replyCount > 0 && (
           <CommentAction
-            count={props.comment.replyCount}
+            count={props.comment.replyCount - replyComment.length}
             onClick={handleLoadMore}
+            loading={loading}
           />
         )}
 

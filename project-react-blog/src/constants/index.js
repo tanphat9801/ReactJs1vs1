@@ -1,5 +1,7 @@
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+// base_url=http://api-meme-zendvn-01.herokuapp.com/api
+
 export const DEFAULT_AVATAR =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXPAer2ilVW8b1pynyMFWdAVGWQWeDgLICig&usqp=CAU";
 

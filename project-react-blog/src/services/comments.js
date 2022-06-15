@@ -13,6 +13,14 @@ const CommentService = {
       },
     });
   },
+  // createComment({
+  //   authorId,
+  //   content,
+  //   postId,
+  //   parentId
+  // }){
+  //   // return api.call( )
+  // }
 };
 
 export default CommentService;

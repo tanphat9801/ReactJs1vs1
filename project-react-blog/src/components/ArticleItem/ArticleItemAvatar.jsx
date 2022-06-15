@@ -7,7 +7,7 @@ const ArticleAvatar = ({ avatar, authorLink, nickname }) => {
     <>
       <div className="article-item__author-image">
         <Link aria-label={nickname} to={authorLink}>
-          <img src={DEFAULT_AVATAR || avatar} alt={nickname} />
+          <img src={avatar || DEFAULT_AVATAR} alt={nickname} />
         </Link>
       </div>
     </>
