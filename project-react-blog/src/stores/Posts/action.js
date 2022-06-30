@@ -11,6 +11,13 @@ export const ACT_ARTICLES = "ACT_ARTICLES";
 
 export const ACT_POST_DETAIL = "ACT_POST_DETAIL";
 export const ACT_RELATEST_POST = "ACT_RELATEST_POST";
+export const ACT_INCREASE_COMMENT_COUNT = "ACT_INCREASE_COMMENT_COUNT";
+
+export function actIncreaseCommentCount() {
+  return{
+    type : ACT_INCREASE_COMMENT_COUNT,
+  }
+}
 
 //action creator latest
 export function actArticleLatest(posts) {
@@ -139,7 +146,7 @@ export const actPostDetailAsync = (slug) => {
       const authorId = post.author;
 
       dispatch(actPostDetail(mappingPostDetail(post)));
-      dispatch(actFetchCommentsAsync({ postId })); 
+      dispatch(actFetchCommentsAsync({ postId }));
       // dung chung gia tri postId, khong lien quan den ca action khac
       dispatch(actRelatestPostAsync({ postId, authorId }));
       return { ok: true };

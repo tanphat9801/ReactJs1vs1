@@ -13,14 +13,14 @@ const CommentService = {
       },
     });
   },
-  // createComment({
-  //   authorId,
-  //   content,
-  //   postId,
-  //   parentId
-  // }){
-  //   // return api.call( )
-  // }
+  createComment({ authorId, content, postId, parentId }) {
+    return api.callWithToken().post("/wp/v2/comments", {
+      author: authorId,
+      content,
+      post: postId,
+      parent: parentId,
+    });
+  },
 };
 
 export default CommentService;

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { genUserLink } from "../../Helper";
 import { formatRelativeDate } from "../../Helper/day";
 
-const CommentItemChild = ({ comment }) => {
+const CommentItemChild = ({ comment, replyClick }) => {
   const { authorAvatar, authorId, authorName, contentHTML, createDate } =
     comment;
   const { dateRelative, dateFormatted } = formatRelativeDate(createDate, true);
@@ -26,7 +26,12 @@ const CommentItemChild = ({ comment }) => {
             className="comments__section--text"
             dangerouslySetInnerHTML={{ __html: contentHTML }}
           ></p>
-          {/* <i class="ion-reply comments__section--reply"></i> */}
+          {comment.parentId === 0 && (
+            <i
+              className="ion-reply comments__section--reply"
+              onClick={replyClick}
+            ></i>
+          )}
         </div>
       </div>
     </>

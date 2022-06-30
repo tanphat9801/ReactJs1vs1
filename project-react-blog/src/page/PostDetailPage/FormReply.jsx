@@ -1,14 +1,19 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./css/post-detail.css";
 import { genUserLink } from "../../Helper";
 import { useState } from "react";
+import Button from "../../shared/Button/Button";
+import { actFetchNewCommentsAsync } from "../../stores/Comments/action";
 
 const FormReply = ({ parentId }) => {
-  const isThisParent = parentId === 0;
-
   const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const currUser = useSelector((state) => state.Auth.currentUser);
+  const postId = useSelector((state) => state.Post.PostDetail?.id);
+
+  const isThisParent = parentId === 0;
   const placeholder = isThisParent ? "Viết bình luận..." : "Nhập phản hồi...";
   const btnLabel = isThisParent ? "Bình luận" : "Phản hồi";
 
@@ -22,8 +27,24 @@ const FormReply = ({ parentId }) => {
   }
 
   const handleContentCmt = (e) => {
-    console.log(e.target.value);
     setContent(e.target.value);
+  };
+
+  const handleSubmitComment = () => {
+    if (loading) return;
+
+    setLoading(true);
+    dispatch(
+      actFetchNewCommentsAsync({
+        authorId: currUser.id,
+        parentId,
+        content,
+        postId: postId,
+      })
+    ).then((res) => {
+      setLoading(false);
+      setContent("");
+    });
   };
 
   return (
@@ -42,7 +63,9 @@ const FormReply = ({ parentId }) => {
           />
         </div>
         <div className="text-right">
-          <button className="btn btn-default">{btnLabel}</button>
+          <Button onClick={handleSubmitComment} loading={loading}>
+            {btnLabel}
+          </Button>
         </div>
       </div>
     </>

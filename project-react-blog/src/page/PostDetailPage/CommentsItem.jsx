@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useCommentPaging } from "../../hooks/useCommentParent";
 import CommentAction from "./CommentAction";
 import CommentItemChild from "./CommentItemChild";
@@ -5,6 +6,7 @@ import "./css/post-detail.css";
 import FormReply from "./FormReply";
 
 const CommentsItem = (props) => {
+  const [isShowForm, setIsShowForm] = useState(false);
   const thisParentId = props.parentId === 0;
 
   const {
@@ -15,10 +17,14 @@ const CommentsItem = (props) => {
     parentId: props.comment.id,
   });
 
+  const handleShowForm = () => {
+    setIsShowForm(!isShowForm);
+  };
+
   return (
     <>
       <li className="item">
-        <CommentItemChild comment={props.comment} />
+        <CommentItemChild replyClick={handleShowForm} comment={props.comment} />
         {/* {reply comments} */}
         {thisParentId && replyComment && replyComment.length > 0 && (
           <ul className="comments">
@@ -42,7 +48,7 @@ const CommentsItem = (props) => {
         )}
 
         {/* reply form  */}
-        {thisParentId && false && <FormReply />}
+        {thisParentId && isShowForm && <FormReply parentId={props.comment.id} />}
       </li>
     </>
   );

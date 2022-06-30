@@ -5,6 +5,7 @@ import { authService } from "../../services/auth";
 //action type
 export const ACT_AUTH_LOGIN_SUCCESS = "ACT_AUTH_LOGIN_SUCCESS";
 export const ACT_LOGOUT_SUCCESS = "ACT_LOGOUT_SUCCESS";
+export const ACT_SET_TOKEN = "ACT_SET_TOKEN";
 
 // action creator
 
@@ -24,6 +25,15 @@ export const actLogout = () => {
   };
 };
 
+export const actSetToken = (token) => {
+  return {
+    type: ACT_SET_TOKEN,
+    payload: {
+      token,
+    },
+  };
+};
+
 // action async
 
 export const actFetchAPIAsync = (token) => {
@@ -32,7 +42,7 @@ export const actFetchAPIAsync = (token) => {
   }
   return async (dispatch) => {
     try {
-      const response = await authService.fetchAPI(token);
+      const response = await authService.fetchAPI();
       const user = mappingCurrentUser(response.data);
       dispatch(actAuthLoginSuccess({ user, token }));
       return {
@@ -54,6 +64,7 @@ export const actAuthLoginAsync = (username, password) => {
     try {
       const response = await authService.login(username, password);
       const token = response.data.token;
+      dispatch(actSetToken(token));
       const responseFetchAPI = await dispatch(actFetchAPIAsync(token));
       return {
         check: responseFetchAPI.check,

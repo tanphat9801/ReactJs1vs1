@@ -2,6 +2,7 @@ import {
   ACT_ARTICLES,
   ACT_ARTICLE_LATEST,
   ACT_ARTICLE_POPULAR,
+  ACT_INCREASE_COMMENT_COUNT,
   ACT_POST_DETAIL,
   ACT_RELATEST_POST,
 } from "./action";
@@ -19,6 +20,14 @@ const initState = {
 
 function reducer(postState = initState, action) {
   switch (action.type) {
+    case ACT_INCREASE_COMMENT_COUNT:
+      return {
+        ...postState,
+        PostDetail: {
+          ...postState.PostDetail,
+          commentcount: postState.PostDetail.commentcount + 1,
+        },
+      };
     case ACT_ARTICLES:
       return {
         ...postState,

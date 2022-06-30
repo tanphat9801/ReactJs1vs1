@@ -2,20 +2,70 @@ import {
   ACT_INIT_CHILDREN_PAGING,
   ACT_FETCH_CHILD_REPLY,
   ACT_FETCH_COMMENTS_DETAIL,
+  ACT_POST_NEW_COMMENT,
+  ACT_NEW_REPLY_COMMENT,
 } from "./action";
 
 const initState = {
   commentParentPaging: {
     list: [],
-    currentPage: 1,
+    currentPage: 0,
+    total: 0,
+    totalPages: 0,
+    exclude: [],
   },
   hasChildPaging: {},
 };
 
 const reducer = (commentsState = initState, action) => {
+  let parentId;
   switch (action.type) {
+    case ACT_NEW_REPLY_COMMENT:
+      parentId = action.payload.comment.parentId;
+      let currrentChildPaging = commentsState.hasChildPaging[parentId];
+      if (!currrentChildPaging) {
+        currrentChildPaging = {
+          list: [],
+          currentPage: 0,
+          total: 0,
+          totalPages: 1,
+          exclude: [],
+        }; // tai tao cau truc paging
+      }
+      return {
+        ...commentsState,
+        hasChildPaging: {
+          [parentId]: {
+            ...currrentChildPaging,
+            list: [
+              ...currrentChildPaging.list,
+              action.payload.comment,
+            ],
+            exclude: [
+              ...currrentChildPaging.exclude,
+              action.payload.comment.id,
+            ],
+          },
+        },
+      };
+
+    case ACT_POST_NEW_COMMENT:
+      return {
+        ...commentsState,
+        commentParentPaging: {
+          ...commentsState.commentParentPaging,
+          list: [
+            action.payload.comment,
+            ...commentsState.commentParentPaging.list,
+          ],
+          exclude: [
+            ...commentsState.commentParentPaging.exclude,
+            action.payload.comment.id,
+          ],
+        },
+      };
     case ACT_FETCH_CHILD_REPLY:
-      const parentId = action.payload.parentId;
+      parentId = action.payload.parentId;
       return {
         ...commentsState,
         hasChildPaging: {
@@ -68,6 +118,7 @@ const reducer = (commentsState = initState, action) => {
                 currentPage: 0,
                 total: 0,
                 totalPages: 1,
+                exclude: [],
               };
             }
             return output;

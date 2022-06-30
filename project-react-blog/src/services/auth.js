@@ -16,11 +16,11 @@ export const authService = {
     });
   },
   fetchAPI(token) {
-    return api.call().get("/wp/v2/users/me", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    // return api.callWithToken().get("/wp/v2/users/me");
+    // return api.call().get("/wp/v2/users/me", {
+    //   headers: {
+    //     Authorization: "Bearer " + token,
+    //   },
+    // });
+    return api.callWithToken().get("/wp/v2/users/me");
   },
 };

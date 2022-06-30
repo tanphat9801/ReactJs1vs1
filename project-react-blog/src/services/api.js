@@ -7,14 +7,12 @@ export const api = {
       baseURL: BASE_URL,
     });
   },
-  callWithToken(){
+  callWithToken() {
     return axios.create({
       baseURL: BASE_URL,
-      headers:{
-        Authorization:  `Bearer  ${localStorage.getItem(ACCESS_TOKEN)}`
-      }
-    })
-  }
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+    });
+  },
 };
-
-
