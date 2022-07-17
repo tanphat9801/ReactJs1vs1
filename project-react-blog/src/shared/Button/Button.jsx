@@ -55,11 +55,4 @@ const Button = ({
 
 export default Button;
 
-// let classes = "btn";
-// if(type === 'default'){
-//     classes += ' btn-default'
-// }else if(type === 'category'){
-//     classes += ' btn-category'
-// }else if( type === 'primary'){
-//     classes += ' btn-primary'
-// }//phương thức cũ
+

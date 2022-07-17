@@ -3,7 +3,6 @@ import {useState, useRef} from 'react'
 import cls from 'classnames';
 import { useDispatch } from 'react-redux'
 import { actAddIncome } from '../stores/action';
-import DateTimePicker from 'react-datetime-picker';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -65,12 +64,6 @@ const BudgetForm = () => {
         }
     }
 
-    function onDateChange(date){
-        setFormData({
-            ...formData,
-            date:date  
-        })
-    }
 
     const showRed = formData.sign === "-"
     const notify = () => toast.success("Thêm mới thành công!");
@@ -114,9 +107,6 @@ const BudgetForm = () => {
                       name="amount"
                     />
                     
-                    <div>
-                        <DateTimePicker name='date' onChange={onDateChange} value={formData.date} />
-                    </div>
 
                     <button onClick={hanldeSubmit} className={cls("add__btn",{
                           'red' : showRed
